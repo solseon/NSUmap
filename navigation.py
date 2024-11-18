@@ -17,7 +17,6 @@ center = [36.908, 127.143619452225]
 m = folium.Map(location=center, zoom_start=16)
 
 # 건물 정보 저장
-
 main = Building("본관", [36.90725, 127.1431])
 engineering1 = Building("공학1관", [36.9073, 127.1436])
 engineering2 = Building("공학2관", [36.9072, 127.1426])
@@ -36,6 +35,7 @@ childwelfare = Building("아동복지학관", [36.91098784498547, 127.1410996641
 library = Building("성암기념중앙도서관", [36.90895245536589, 127.14343965053558]) # 성암기념중앙도서관
 studentwelfare = Building("학생복지학관", [36.90974808548412, 127.14359297462225]) # 학생복지학관
 learningsupport = Building("교수학습지원센터", [36.91020060473758, 127.14348568626166]) # 교수학습지원센터
+ccpark = Building("CC동산", [36.9069, 127.1433])
 
 # 도로 좌표
 main_f = Building("본관 앞", [36.90755, 127.14305])
