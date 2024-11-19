@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_5a6b447724db361fa4e5bd3da2299368 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_5a6b447724db361fa4e5bd3da2299368" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_5a6b447724db361fa4e5bd3da2299368 = L.map(
+                "map_5a6b447724db361fa4e5bd3da2299368",
+                {
+                    center: [36.908, 127.143619452225],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 15.5,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_268f62b2b5a83ffef1cd013d54056208 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detectRetina": false, "maxNativeZoom": 19, "maxZoom": 19, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+        
+    
+            tile_layer_268f62b2b5a83ffef1cd013d54056208.addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var marker_fe34f5df0cf01f8f5c141ee22b399f43 = L.marker(
+                [36.9072014, 127.1430552],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_7f0fcfc5dbbfd2f47d40e64bd2eedbfc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_fe34f5df0cf01f8f5c141ee22b399f43.setIcon(icon_7f0fcfc5dbbfd2f47d40e64bd2eedbfc);
+        
+    
+        var popup_31030ea5bde93256a36f5b44fcca4f62 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_4be6963d945400240991445e71682028 = $(`<div id="html_4be6963d945400240991445e71682028" style="width: 100.0%; height: 100.0%;">본관</div>`)[0];
+                popup_31030ea5bde93256a36f5b44fcca4f62.setContent(html_4be6963d945400240991445e71682028);
+            
+        
+
+        marker_fe34f5df0cf01f8f5c141ee22b399f43.bindPopup(popup_31030ea5bde93256a36f5b44fcca4f62)
+        ;
+
+        
+    
+    
+            var marker_6abd75a36d5f47fc2df7cc0a2dd09d3b = L.marker(
+                [36.90818157832219, 127.14407494870781],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_23d1f4ceef8b0d1d8f656d7e273c349b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_6abd75a36d5f47fc2df7cc0a2dd09d3b.setIcon(icon_23d1f4ceef8b0d1d8f656d7e273c349b);
+        
+    
+        var popup_524a2c91585b4a8156a51137ac4cc877 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_3f5086f36a70906b411f7cd65227dba6 = $(`<div id="html_3f5086f36a70906b411f7cd65227dba6" style="width: 100.0%; height: 100.0%;">상경학관</div>`)[0];
+                popup_524a2c91585b4a8156a51137ac4cc877.setContent(html_3f5086f36a70906b411f7cd65227dba6);
+            
+        
+
+        marker_6abd75a36d5f47fc2df7cc0a2dd09d3b.bindPopup(popup_524a2c91585b4a8156a51137ac4cc877)
+        ;
+
+        
+    
+    
+            var marker_bd7902e166ae586c98cabe88281eba1c = L.marker(
+                [36.907897270555814, 127.14147090911865],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_d9cea7d76377b9d403ff4052cf9f6473 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_bd7902e166ae586c98cabe88281eba1c.setIcon(icon_d9cea7d76377b9d403ff4052cf9f6473);
+        
+    
+        var popup_4200f98955ad0e19afee26b9428a3a74 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_ab35d5e806167ee7f0e2c376f6773269 = $(`<div id="html_ab35d5e806167ee7f0e2c376f6773269" style="width: 100.0%; height: 100.0%;">화정관</div>`)[0];
+                popup_4200f98955ad0e19afee26b9428a3a74.setContent(html_ab35d5e806167ee7f0e2c376f6773269);
+            
+        
+
+        marker_bd7902e166ae586c98cabe88281eba1c.bindPopup(popup_4200f98955ad0e19afee26b9428a3a74)
+        ;
+
+        
+    
+    
+            var marker_85037b3ff2df12647c3a6901d3089f28 = L.marker(
+                [36.907140585234814, 127.14252819637],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_8d9065dcf8942c1dd2533513d398e6fb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_85037b3ff2df12647c3a6901d3089f28.setIcon(icon_8d9065dcf8942c1dd2533513d398e6fb);
+        
+    
+        var popup_399e1b0184400d38959303d485115efd = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_6b2b96456908134fdb2721bba12d9e31 = $(`<div id="html_6b2b96456908134fdb2721bba12d9e31" style="width: 100.0%; height: 100.0%;">공학1관</div>`)[0];
+                popup_399e1b0184400d38959303d485115efd.setContent(html_6b2b96456908134fdb2721bba12d9e31);
+            
+        
+
+        marker_85037b3ff2df12647c3a6901d3089f28.bindPopup(popup_399e1b0184400d38959303d485115efd)
+        ;
+
+        
+    
+    
+            var marker_335c75506505cf5ab6e37a5978b361fa = L.marker(
+                [36.90728642610151, 127.14364399532019],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_9ac5da10e46165a0be36e54fc6f8e7cc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_335c75506505cf5ab6e37a5978b361fa.setIcon(icon_9ac5da10e46165a0be36e54fc6f8e7cc);
+        
+    
+        var popup_9f7d7a24474df9bd39a343c7ab468fa2 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_bb2b01c90becdcd60d6dadb3f1be6bd6 = $(`<div id="html_bb2b01c90becdcd60d6dadb3f1be6bd6" style="width: 100.0%; height: 100.0%;">공학2관</div>`)[0];
+                popup_9f7d7a24474df9bd39a343c7ab468fa2.setContent(html_bb2b01c90becdcd60d6dadb3f1be6bd6);
+            
+        
+
+        marker_335c75506505cf5ab6e37a5978b361fa.bindPopup(popup_9f7d7a24474df9bd39a343c7ab468fa2)
+        ;
+
+        
+    
+    
+            var marker_5a87ebffb76194b3c3b6ad09f5262ee2 = L.marker(
+                [36.90817393627746, 127.1450811624527],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_8a6deb31eba8a2c4a8d062b71d9c0b93 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_5a87ebffb76194b3c3b6ad09f5262ee2.setIcon(icon_8a6deb31eba8a2c4a8d062b71d9c0b93);
+        
+    
+        var popup_c959bd7b2046a2ea818ebf059a27f3f4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7a107bde016030e9270290182059cc04 = $(`<div id="html_7a107bde016030e9270290182059cc04" style="width: 100.0%; height: 100.0%;">보건의료학관</div>`)[0];
+                popup_c959bd7b2046a2ea818ebf059a27f3f4.setContent(html_7a107bde016030e9270290182059cc04);
+            
+        
+
+        marker_5a87ebffb76194b3c3b6ad09f5262ee2.bindPopup(popup_c959bd7b2046a2ea818ebf059a27f3f4)
+        ;
+
+        
+    
+    
+            var marker_db83d767ab2bc7f214dc6385885efd00 = L.marker(
+                [36.90863133961879, 127.14494140543114],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_acb12eb999f6d7f45c9a32536f326b71 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_db83d767ab2bc7f214dc6385885efd00.setIcon(icon_acb12eb999f6d7f45c9a32536f326b71);
+        
+    
+        var popup_1f4b133d7252a53aae6063ba0bcbb7e9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_93bad2de0716812ac4e46690a3c2d2f6 = $(`<div id="html_93bad2de0716812ac4e46690a3c2d2f6" style="width: 100.0%; height: 100.0%;">조형학관</div>`)[0];
+                popup_1f4b133d7252a53aae6063ba0bcbb7e9.setContent(html_93bad2de0716812ac4e46690a3c2d2f6);
+            
+        
+
+        marker_db83d767ab2bc7f214dc6385885efd00.bindPopup(popup_1f4b133d7252a53aae6063ba0bcbb7e9)
+        ;
+
+        
+    
+    
+            var marker_11a79293d9b5a3fce0ab4f15783fd63c = L.marker(
+                [36.90908220639218, 127.14487166799675],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_9cb6d0c3d8591094d692500bc294adf7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_11a79293d9b5a3fce0ab4f15783fd63c.setIcon(icon_9cb6d0c3d8591094d692500bc294adf7);
+        
+    
+        var popup_8e6163c4e4726d5f5d72d01bf1b854f1 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7009ac72e5ee2507023b300452aaf34c = $(`<div id="html_7009ac72e5ee2507023b300452aaf34c" style="width: 100.0%; height: 100.0%;">인문사회학관</div>`)[0];
+                popup_8e6163c4e4726d5f5d72d01bf1b854f1.setContent(html_7009ac72e5ee2507023b300452aaf34c);
+            
+        
+
+        marker_11a79293d9b5a3fce0ab4f15783fd63c.bindPopup(popup_8e6163c4e4726d5f5d72d01bf1b854f1)
+        ;
+
+        
+    
+    
+            var marker_78e779aef66be87294964dd183077b36 = L.marker(
+                [36.90962468046938, 127.14562536872994],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_932eb0cf512ff37961402c422adf00d8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_78e779aef66be87294964dd183077b36.setIcon(icon_932eb0cf512ff37961402c422adf00d8);
+        
+    
+        var popup_32a377958c5705a147ce10a457a40e88 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_7e050cf9876fc0b514d4102ff092f407 = $(`<div id="html_7e050cf9876fc0b514d4102ff092f407" style="width: 100.0%; height: 100.0%;">디자인정보관</div>`)[0];
+                popup_32a377958c5705a147ce10a457a40e88.setContent(html_7e050cf9876fc0b514d4102ff092f407);
+            
+        
+
+        marker_78e779aef66be87294964dd183077b36.bindPopup(popup_32a377958c5705a147ce10a457a40e88)
+        ;
+
+        
+    
+    
+            var marker_b5d3b6620da2ee37a0ab6ae4b4ac2e75 = L.marker(
+                [36.90995186491852, 127.14474856853485],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_889acce49b8565c881c273c6c84a08c8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_b5d3b6620da2ee37a0ab6ae4b4ac2e75.setIcon(icon_889acce49b8565c881c273c6c84a08c8);
+        
+    
+        var popup_59b77d8be175193b5baed6a5b60bd0e9 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_507530f1381260b4592c5f6cbe06c80e = $(`<div id="html_507530f1381260b4592c5f6cbe06c80e" style="width: 100.0%; height: 100.0%;">21세기개발관</div>`)[0];
+                popup_59b77d8be175193b5baed6a5b60bd0e9.setContent(html_507530f1381260b4592c5f6cbe06c80e);
+            
+        
+
+        marker_b5d3b6620da2ee37a0ab6ae4b4ac2e75.bindPopup(popup_59b77d8be175193b5baed6a5b60bd0e9)
+        ;
+
+        
+    
+    
+            var marker_4c2fd40ceac665ad3e94d1cc26823ee8 = L.marker(
+                [36.91061167503247, 127.14485084049954],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_34575e98193ff262bbc0461414f1e2bd = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_4c2fd40ceac665ad3e94d1cc26823ee8.setIcon(icon_34575e98193ff262bbc0461414f1e2bd);
+        
+    
+        var popup_e509dc5ce60bb3d2995e4feaceb0cd67 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_160efb19017d8e0093f2a3452f75f3e0 = $(`<div id="html_160efb19017d8e0093f2a3452f75f3e0" style="width: 100.0%; height: 100.0%;">지식정보관</div>`)[0];
+                popup_e509dc5ce60bb3d2995e4feaceb0cd67.setContent(html_160efb19017d8e0093f2a3452f75f3e0);
+            
+        
+
+        marker_4c2fd40ceac665ad3e94d1cc26823ee8.bindPopup(popup_e509dc5ce60bb3d2995e4feaceb0cd67)
+        ;
+
+        
+    
+    
+            var marker_41644835a8ff5791625c7a20361edd52 = L.marker(
+                [36.909789150342704, 127.14694525959654],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_fb502705115b2f659a0e537a0a33bd5f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_41644835a8ff5791625c7a20361edd52.setIcon(icon_fb502705115b2f659a0e537a0a33bd5f);
+        
+    
+        var popup_3095709177b05b5ff3ec1262be0975b4 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_f4cbfeeb8ece6c50c73ec0b006e68810 = $(`<div id="html_f4cbfeeb8ece6c50c73ec0b006e68810" style="width: 100.0%; height: 100.0%;">성암문화체육관</div>`)[0];
+                popup_3095709177b05b5ff3ec1262be0975b4.setContent(html_f4cbfeeb8ece6c50c73ec0b006e68810);
+            
+        
+
+        marker_41644835a8ff5791625c7a20361edd52.bindPopup(popup_3095709177b05b5ff3ec1262be0975b4)
+        ;
+
+        
+    
+    
+            var marker_6380f60635d3ba4f529c7ebe8bfad732 = L.marker(
+                [36.90870757810947, 127.14732843829314],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_9f3a5a9c8d148bc0086c0ec29b22d595 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_6380f60635d3ba4f529c7ebe8bfad732.setIcon(icon_9f3a5a9c8d148bc0086c0ec29b22d595);
+        
+    
+        var popup_c9193aea1486794f497f93b1ff117fb0 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_be8d82c11d486f128eadd812f50105b7 = $(`<div id="html_be8d82c11d486f128eadd812f50105b7" style="width: 100.0%; height: 100.0%;">제1엘림생활관</div>`)[0];
+                popup_c9193aea1486794f497f93b1ff117fb0.setContent(html_be8d82c11d486f128eadd812f50105b7);
+            
+        
+
+        marker_6380f60635d3ba4f529c7ebe8bfad732.bindPopup(popup_c9193aea1486794f497f93b1ff117fb0)
+        ;
+
+        
+    
+    
+            var marker_f3d3d58a359e449ec503b024889cfc7e = L.marker(
+                [36.908512796802036, 127.14654564857483],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_8ef88e4afbd4634b4df0d5c3864f28de = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_f3d3d58a359e449ec503b024889cfc7e.setIcon(icon_8ef88e4afbd4634b4df0d5c3864f28de);
+        
+    
+        var popup_3d5af471c1976c775626d8a389c1f16f = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_a222aa48e92bcdd32f316ff35f7085ea = $(`<div id="html_a222aa48e92bcdd32f316ff35f7085ea" style="width: 100.0%; height: 100.0%;">제2엘림생활관</div>`)[0];
+                popup_3d5af471c1976c775626d8a389c1f16f.setContent(html_a222aa48e92bcdd32f316ff35f7085ea);
+            
+        
+
+        marker_f3d3d58a359e449ec503b024889cfc7e.bindPopup(popup_3d5af471c1976c775626d8a389c1f16f)
+        ;
+
+        
+    
+    
+            var marker_442797e721e6b31a761ca60837a1d1e1 = L.marker(
+                [36.91098784498547, 127.14109966412538],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_ac95e43fda4c0b6d710e96564784c689 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_442797e721e6b31a761ca60837a1d1e1.setIcon(icon_ac95e43fda4c0b6d710e96564784c689);
+        
+    
+        var popup_98fb1fd50443c0d873875f25f5a3681c = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_c25e14d75a701e5a0841a2f13ad89e81 = $(`<div id="html_c25e14d75a701e5a0841a2f13ad89e81" style="width: 100.0%; height: 100.0%;">아동복지학관</div>`)[0];
+                popup_98fb1fd50443c0d873875f25f5a3681c.setContent(html_c25e14d75a701e5a0841a2f13ad89e81);
+            
+        
+
+        marker_442797e721e6b31a761ca60837a1d1e1.bindPopup(popup_98fb1fd50443c0d873875f25f5a3681c)
+        ;
+
+        
+    
+    
+            var marker_820ccd1c61d85520e7e32890fb18f2b6 = L.marker(
+                [36.90895245536589, 127.14343965053558],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_329cb61aa1aa02b4399fc39f1d504b8c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_820ccd1c61d85520e7e32890fb18f2b6.setIcon(icon_329cb61aa1aa02b4399fc39f1d504b8c);
+        
+    
+        var popup_14e702d0707ae19c5a1d4f37e62ee2ec = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_fcc75a47a0e9df149673797a2e52f6ab = $(`<div id="html_fcc75a47a0e9df149673797a2e52f6ab" style="width: 100.0%; height: 100.0%;">성암기념중앙도서관</div>`)[0];
+                popup_14e702d0707ae19c5a1d4f37e62ee2ec.setContent(html_fcc75a47a0e9df149673797a2e52f6ab);
+            
+        
+
+        marker_820ccd1c61d85520e7e32890fb18f2b6.bindPopup(popup_14e702d0707ae19c5a1d4f37e62ee2ec)
+        ;
+
+        
+    
+    
+            var marker_25ab28c1ed10fd87eeceb6d8db0e2aa0 = L.marker(
+                [36.90974808548412, 127.14359297462225],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_e4545017907f5eaa01eb74d6c8f59dd0 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_25ab28c1ed10fd87eeceb6d8db0e2aa0.setIcon(icon_e4545017907f5eaa01eb74d6c8f59dd0);
+        
+    
+        var popup_5bd9702e3c7c8c2847941f15eaccfa63 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_07f6361d2de7bd3351a90f07498bcdd7 = $(`<div id="html_07f6361d2de7bd3351a90f07498bcdd7" style="width: 100.0%; height: 100.0%;">학생복지학관</div>`)[0];
+                popup_5bd9702e3c7c8c2847941f15eaccfa63.setContent(html_07f6361d2de7bd3351a90f07498bcdd7);
+            
+        
+
+        marker_25ab28c1ed10fd87eeceb6d8db0e2aa0.bindPopup(popup_5bd9702e3c7c8c2847941f15eaccfa63)
+        ;
+
+        
+    
+    
+            var marker_dfc461474cdaf2400515b8be3804a0e7 = L.marker(
+                [36.91020060473758, 127.14348568626166],
+                {}
+            ).addTo(map_5a6b447724db361fa4e5bd3da2299368);
+        
+    
+            var icon_1f5ad2aece0345907f519bb615c5e9a7 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "circle", "iconColor": "white", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_dfc461474cdaf2400515b8be3804a0e7.setIcon(icon_1f5ad2aece0345907f519bb615c5e9a7);
+        
+    
+        var popup_0cf084bd0a5b074a9552e53e9e969e8a = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_13deec243d7e2e45901e92ba908de7ce = $(`<div id="html_13deec243d7e2e45901e92ba908de7ce" style="width: 100.0%; height: 100.0%;">교수학습지원센터</div>`)[0];
+                popup_0cf084bd0a5b074a9552e53e9e969e8a.setContent(html_13deec243d7e2e45901e92ba908de7ce);
+            
+        
+
+        marker_dfc461474cdaf2400515b8be3804a0e7.bindPopup(popup_0cf084bd0a5b074a9552e53e9e969e8a)
+        ;
+
+        
+    
+</script>
+</html>
