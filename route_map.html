@@ -1,5 +1,6 @@
+<!-- route_map.html -->
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,25 +8,18 @@
 </head>
 <body>
     <h1>길찾기</h1>
-    
-    <!-- 출발지와 도착지 입력 폼 -->
-    <form action="/route" method="POST">
+    <form method="post" action="/route">
         <label for="start">출발지:</label>
-        <input type="text" id="start" name="start" placeholder="출발지 이름" required>
-        <br><br>
+        <input type="text" id="start" name="start" required>
         <label for="end">도착지:</label>
-        <input type="text" id="end" name="end" placeholder="도착지 이름" required>
-        <br><br>
+        <input type="text" id="end" name="end" required>
         <button type="submit">길찾기</button>
     </form>
 
-    <!-- 출발지와 도착지 표시 -->
-    {% if start and end %}
-        <h3>출발지: {{ start }}</h3>
-        <h3>도착지: {{ end }}</h3>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
     {% endif %}
-    
-    <!-- 지도 표시 -->
+
     {% if map_html %}
         <div>{{ map_html|safe }}</div>
     {% endif %}
