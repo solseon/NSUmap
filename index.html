@@ -7,6 +7,14 @@
         <title>NSU map</title>
     </head>
     <body>
+        <form method="post" action="/route">
+        <label for="start">출발지:</label>
+        <input type="text" id="start" name="start" required>
+        <label for="end">도착지:</label>
+        <input type="text" id="end" name="end" required>
+        <button type="submit">길찾기</button>
+    </form>
         <iframe title="NSU map" src="NSUmap.html" width="100%" height="850px" />
+        
     </body>
 </html>
