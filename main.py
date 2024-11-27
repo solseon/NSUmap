@@ -47,7 +47,6 @@ parking_group = building("동아리방 주차장", [36.9110, 127.1446])
 parking_gym = building("성함문화체육관 주차장", [36.9107, 127.1463])
 parking_elem1 = building("엘림1생활관 주차장", [36.9091, 127.1472])
 
-
 markinglist = list() # 건물 마킹을 저장해주는 리스트
 
 # 리스트에 건물 추가
