@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경로 지도</title>
+</head>
+<body>
+    <h1>길찾기</h1>
+    <form method="POST">
+        <label for="start">출발지:</label>
+        <input type="text" id="start" name="start" required><br><br>
+        <label for="end">도착지:</label>
+        <input type="text" id="end" name="end" required><br><br>
+        <input type="submit" value="길찾기">
+    </form>
+
+    {% if map_html %}
+        <h2>경로 지도</h2>
+        <div>{{ map_html | safe }}</div>
+    {% endif %}
+
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
+    {% endif %}
+</body>
+</html>

@@ -1,4 +1,5 @@
 import folium   # folium을 호출
+import app
 from buildingList import building
 
 center = [36.908, 127.143619452225] # 남서울대학교의 [위도, 경도] 불러오는 함수
