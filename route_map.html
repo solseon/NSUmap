@@ -1,27 +1,27 @@
-<!-- route_map.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>길찾기</title>
+    <title>경로 지도</title>
 </head>
 <body>
     <h1>길찾기</h1>
-    <form method="post" action="/route">
+    <form method="POST">
         <label for="start">출발지:</label>
-        <input type="text" id="start" name="start" required>
+        <input type="text" id="start" name="start" required><br><br>
         <label for="end">도착지:</label>
-        <input type="text" id="end" name="end" required>
-        <button type="submit">길찾기</button>
+        <input type="text" id="end" name="end" required><br><br>
+        <input type="submit" value="길찾기">
     </form>
 
-    {% if error_message %}
-        <p style="color: red;">{{ error_message }}</p>
+    {% if map_html %}
+        <h2>경로 지도</h2>
+        <div>{{ map_html | safe }}</div>
     {% endif %}
 
-    {% if map_html %}
-        <div>{{ map_html|safe }}</div>
+    {% if error_message %}
+        <p style="color:red;">{{ error_message }}</p>
     {% endif %}
 </body>
 </html>
