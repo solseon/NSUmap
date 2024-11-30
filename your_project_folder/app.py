@@ -94,6 +94,8 @@ def route():
     buildings = load_buildings()
     path_result = None  # 경로 결과 저장
 
+    test_path = None
+
     # connections.csv에서 연결 정보 읽기
     connections = {}
     with open(os.path.join(app.root_path, 'static', 'connections.csv'), 'r', encoding='utf-8') as file:
@@ -142,12 +144,16 @@ def route():
                 error_message = "모든 경로를 방문하는 경로를 찾을 수 없습니다."
         else:
             error_message = f"출발지 또는 도착지 정보가 유효하지 않습니다: {start}, {end}"
+        test_path = 'route_map.html'
+    else:
+        test_path = 'index.html'
+        
 
     return render_template(
-        'route_map.html', 
-        start=start, 
-        end=end, 
-        map_html=map_html, 
+        test_path,
+        start=start,
+        end=end,
+        map_html=map_html,
         error_message=error_message, 
         path_result=path_result  # 경로 결과 전달
     )

@@ -96,4 +96,6 @@ markinglist.append(parking_elem1.marking("red", "circle"))
 for mark in markinglist:    # 리스트에 저장된 마킹 추가
     mark.add_to(m)
 
+
+
 m.save("NSUmap.html") # 지도 출력

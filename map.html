@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>길찾기</title>
+</head>
+<body>
+    <h1>길찾기</h1>
+    <form action="/route" method="POST">
+        <label for="start">출발지:</label>
+        <select name="start" id="start">
+            {% for name, _ in buildings.items() %}
+            <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="end">도착지:</label>
+        <select name="end" id="end">
+            {% for name, _ in buildings.items() %}
+            <option value="{{ name }}">{{ name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">길찾기</button>
+    </form>
+
+    <!-- 에러 메시지 표시 -->
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+</body>
+</html>
