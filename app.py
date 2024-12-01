@@ -20,38 +20,7 @@ def load_buildings():
                 buildings[name] = [lat, lon]
     return buildings
 
-# 다익스트라 알고리즘을 이용해 최단 경로 찾기
-def find_shortest_path(connections, start, end):
-    distances = {node: float('inf') for node in connections}
-    distances[start] = 0
-    priority_queue = [(0, start, [])]  # (거리, 현재 노드, 경로)
-    
-    while priority_queue:
-        current_distance, current_node, path = heapq.heappop(priority_queue)
-        print(f"현재 노드: {current_node}, 거리: {current_distance}, 경로: {path}")  # 디버깅 출력
-        
-        if current_distance > distances[current_node]:
-            continue
-        
-        path = path + [current_node]
-        
-        if current_node == end:
-            print(f"최단 경로 찾음: {path}")
-            return path
-        
-        for neighbor, weight in connections.get(current_node, {}).items():
-            distance = current_distance + weight
-            
-            # 직접 연결된 경로는 제외하도록 처리
-            if current_node != start or neighbor != end:
-                if distance < distances[neighbor]:
-                    distances[neighbor] = distance
-                    heapq.heappush(priority_queue, (distance, neighbor, path))
-                    print(f"추가 탐색: {neighbor}, 업데이트된 거리: {distance}, 경로: {path}")
-    
-    print("경로를 찾을 수 없음")
-    return None
-
+# 탐욕 알고리즘을 이용해 모든 노드 방문
 def find_path_visiting_all(connections, start, end):
     """
     출발지에서 도착지까지 모든 중간 노드를 순차적으로 방문하며 경로를 생성.
