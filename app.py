@@ -2,6 +2,7 @@ import os
 import folium
 import csv
 from flask import Flask, render_template, request
+from folium import plugins, CustomIcon, Icon, Popup
 from folium.plugins import MarkerCluster
 import heapq
 
@@ -83,117 +84,125 @@ def find_path_visiting_all(connections, start, end):
 
     return path
 
-
-@app.route("/route", methods=["GET", "POST"])
-def route():
-    start = None
-    end = None
-    map_html = None
-    error_message = None
-    path_result = None  # 경로 결과 저장
-    buildings = load_buildings()
-
-    # CSV에서 연결 정보 읽기
+def load_connections():
     connections = {}
     with open(os.path.join(app.root_path, 'static', 'connections.csv'), 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)
         for row in reader:
             start_building, end_building, distance = row[0], row[1], float(row[2])
-            if start_building not in connections:
-                connections[start_building] = {}
-            connections[start_building][end_building] = distance
-            if end_building not in connections:
-                connections[end_building] = {}
-            connections[end_building][start_building] = distance
+            connections.setdefault(start_building, {})[end_building] = distance
+            connections.setdefault(end_building, {})[start_building] = distance
+    return connections
 
-    # 기본 지도 로딩 (처음 페이지를 열 때 지도와 검색 폼을 표시)
-    default_coords = list(buildings.values())[0]  # 첫 번째 건물의 좌표를 기본값으로 설정
-    m = folium.Map(location=default_coords, zoom_start=18)
-    map_html = m._repr_html_()  # 지도 HTML을 전달
-
-    # 카페와 흡연장 위치 로딩
-    cafes = load_places('cafe.csv')  # 카페 위치
-    smoking_areas = load_places('smoking_area.csv')  # 흡연장 위치
-
-    if request.method == "POST":
-        start = request.form.get('start')
-        end = request.form.get('end')
-
-        start = start.strip().lower()
-        end = end.strip().lower()
-
-        start_coords = buildings.get(start)
-        end_coords = buildings.get(end)
-
-        if start_coords and end_coords:
-            path = find_path_visiting_all(connections, start, end)
-            if path:
-                path_result = " -> ".join(path)
-                coordinates = [buildings[node] for node in path]
-
-                # 경로 추가 (폴리라인 및 마커 추가)
-                m = folium.Map(location=start_coords, zoom_start=18)
-                folium.PolyLine(coordinates, color="blue", weight=2.5, opacity=1).add_to(m)
-
-                for node in path:
-                    coords = buildings.get(node)
-                    folium.Marker(coords, popup=node).add_to(m)
-
-                map_html = m._repr_html_()  # 업데이트된 지도 HTML
-
-            else:
-                error_message = "모든 경로를 방문하는 경로를 찾을 수 없습니다."
-        else:
-            error_message = f"출발지 또는 도착지 정보가 유효하지 않습니다: {start}, {end}"
-
-    # 카페와 흡연장 마커 추가
-    if request.args.get("show_cafes"):
-        for cafe in cafes:
-            folium.Marker(cafe['coords'], popup=cafe['name'], icon=folium.Icon(color='green')).add_to(m)
-
-    if request.args.get("show_smoking_areas"):
-        for smoking_area in smoking_areas:
-            folium.Marker(smoking_area['coords'], popup=smoking_area['name'], icon=folium.Icon(color='red')).add_to(m)
-
-    map_html = m._repr_html_()  # 마커 추가 후 다시 지도 HTML 업데이트
-
-    return render_template(
-        'route_map.html', 
-        start=start, 
-        end=end, 
-        map_html=map_html, 
-        error_message=error_message, 
-        path_result=path_result, 
-        cafes=cafes, 
-        smoking_areas=smoking_areas  # 카페와 흡연장 데이터를 템플릿에 전달
-    )
-
-def load_places(file_name):
+def load_places(filename):
     places = []
-    file_path = os.path.join(app.root_path, 'static', file_name)
+    file_path = os.path.join(app.root_path, 'static', filename)
     
     with open(file_path, 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
         next(reader)  # 첫 번째 행(헤더)을 건너뜁니다.
         
         for row in reader:
-            # CSV에서 읽은 행(row)의 첫 번째 열을 건물 이름, 두 번째 열을 위도(lat), 세 번째 열을 경도(lon)으로 처리
-            name, lat, lon = row[0], row[1], row[2]
-            
-            # lat와 lon이 숫자값이므로 float로 변환
             try:
+                # CSV에서 읽은 행(row)의 첫 번째 열을 건물 이름, 두 번째 열을 위도(lat), 세 번째 열을 경도(lon)으로 처리
+                name, lat, lon = row[0], row[1], row[2]
+                
+                # lat와 lon이 숫자값이므로 float로 변환
                 lat = float(lat)
                 lon = float(lon)
+                
+                # 유효한 좌표일 경우에만 places 리스트에 추가
+                places.append({'name': name, 'coords': [lat, lon]})
             except ValueError:
-                print(f"잘못된 데이터: {name}의 위도({lat}) 또는 경도({lon}) 값이 숫자가 아닙니다.")
-                continue  # 잘못된 데이터가 있으면 건너뜁니다.
-            
-            places.append({'name': name, 'coords': [lat, lon]})
+                # 잘못된 데이터가 있을 경우, 해당 행을 건너뜁니다.
+                print(f"잘못된 데이터: {row} (위도나 경도가 잘못된 값입니다.)")
+                continue
     
     return places
 
+@app.route("/route", methods=["GET", "POST"])
+def route():
+    # 빌딩 데이터와 경로 연결 정보 로드
+    buildings = load_buildings()
+    connections = load_connections()  # 연결 정보 로드
+    cafes = load_places('cafe.csv')  # 카페 데이터 로드
+    smoking_areas = load_places('smoking_area.csv')  # 흡연장 데이터 로드
 
+    # 기본 지도 설정
+    default_coords = list(buildings.values())[0]  # 첫 번째 건물 위치를 사용하여 기본 지도 설정
+    m = folium.Map(location=default_coords, zoom_start=16)
+
+    start = None
+    end = None
+    path_result = None
+    error_message = None
+
+    # 길찾기 (POST 요청)
+    if request.method == "POST":
+        start = request.form.get('start').strip().lower()  # 출발지
+        end = request.form.get('end').strip().lower()  # 도착지
+
+        start_coords = buildings.get(start)
+        end_coords = buildings.get(end)
+
+        if start_coords and end_coords:
+            path = find_path_visiting_all(connections, start, end)  # 경로 찾기
+            if path:
+                path_result = " -> ".join(path)
+                coordinates = [buildings[node] for node in path]
+
+                # 지도에 경로 표시
+                folium.PolyLine(coordinates, color="blue", weight=2.5, opacity=1).add_to(m)
+                folium.Marker(
+                    start_coords, 
+                    popup=folium.Popup(f"<pre> {start.capitalize()}</pre>",max_width=300),
+                    icon=folium.Icon(color="blue", icon="play")
+                ).add_to(m)
+                folium.Marker(end_coords, popup=f"도착지: {end.capitalize()}",
+                              icon=folium.Icon(color="blue", icon="stop")).add_to(m)
+            else:
+                error_message = "모든 경로를 방문하는 경로를 찾을 수 없습니다."
+        else:
+            error_message = f"출발지 또는 도착지 정보가 유효하지 않습니다: {start}, {end}"
+
+    # 카페/흡연장 마커 추가 (GET 요청)
+    if request.args.get("show_cafes"):
+        for cafe in cafes:
+            folium.Marker(cafe['coords'], popup=cafe['name'],
+                          icon=folium.Icon(color="green", prefix="fa", icon="coffee")).add_to(m)
+
+    if request.args.get("show_smoking_areas"):
+        for smoking_area in smoking_areas:
+            folium.Marker(smoking_area['coords'], popup=smoking_area['name'],
+                          icon=folium.Icon(color="red", prefix="fa", icon="smoking")).add_to(m)
+
+    map_html = m._repr_html_()
+
+    return render_template(
+        'route_map.html',
+        map_html=map_html,
+        path_result=path_result,
+        error_message=error_message,
+    )
+
+# 경로 마커들을 저장할 리스트는 글로벌 변수에서 로컬 변수로 변경
+@app.route("/reset", methods=["POST"])
+def reset():
+    # 초기화된 지도 생성 (마커와 경로는 추가하지 않음)
+    buildings = load_buildings()
+    initial_coords = list(buildings.values())[0]  # 첫 번째 건물 위치 사용
+    m = folium.Map(location=initial_coords, zoom_start=16)  # 초기 중심 좌표 설정
+
+    # 경로와 마커 추가하지 않음 (완전 초기 상태)
+    path_result = None
+    error_message = None
+
+    # 초기화된 지도 HTML 반환
+    map_html = m._repr_html_()
+
+    # 초기화된 지도와 경로 결과를 HTML에 전달
+    return render_template('route_map.html', map_html=map_html, path_result=path_result, error_message=error_message)
 
 if __name__ == "__main__":
     app.run(debug=True)
