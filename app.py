@@ -20,6 +20,7 @@ def load_buildings():
                 buildings[name] = [lat, lon]
     return buildings
 
+
 # 탐욕 알고리즘을 이용해 모든 노드 방문
 def find_path_visiting_all(connections, start, end):
     """
@@ -125,26 +126,40 @@ def route():
                 folium.PolyLine(coordinates, color="blue", weight=2.5, opacity=1).add_to(m)
                 folium.Marker(
                     start_coords, 
-                    popup=folium.Popup(f"<pre> {start.capitalize()}</pre>",max_width=300),
+                    popup=folium.Popup(f"<p> {start.capitalize()}</p>",max_width=300),
                     icon=folium.Icon(color="blue", icon="play")
                 ).add_to(m)
-                folium.Marker(end_coords, popup=f"도착지: {end.capitalize()}",
-                              icon=folium.Icon(color="blue", icon="stop")).add_to(m)
+
+                folium.Marker(
+                    end_coords, 
+                    popup=folium.Popup(f"<p> {end.capitalize()}</p>",max_width=300),
+                    icon=folium.Icon(color="blue", icon="stop")
+                ).add_to(m)
             else:
                 error_message = "모든 경로를 방문하는 경로를 찾을 수 없습니다."
         else:
             error_message = f"출발지 또는 도착지 정보가 유효하지 않습니다: {start}, {end}"
 
     # 카페/흡연장 마커 추가 (GET 요청)
+    
     if request.args.get("show_cafes"):
         for cafe in cafes:
-            folium.Marker(cafe['coords'], popup=cafe['name'],
-                          icon=folium.Icon(color="green", prefix="fa", icon="coffee")).add_to(m)
+            popup_content = f"<p style='color:green; font-weight:bold;'>{cafe['name']}</p>"  # HTML <p> 태그
+            folium.Marker(
+                cafe['coords'], 
+                popup=folium.Popup(popup_content, max_width=300),  # HTML 팝업 추가
+                icon=folium.Icon(color="green", prefix="fa", icon="coffee")
+            ).add_to(m)
 
     if request.args.get("show_smoking_areas"):
         for smoking_area in smoking_areas:
-            folium.Marker(smoking_area['coords'], popup=smoking_area['name'],
-                          icon=folium.Icon(color="red", prefix="fa", icon="smoking")).add_to(m)
+            popup_content = f"<p style='color:red; font-style:italic;'>{smoking_area['name']}</p>"  # HTML <p> 태그
+            folium.Marker(
+                smoking_area['coords'], 
+                popup=folium.Popup(popup_content, max_width=300),  # HTML 팝업 추가
+                icon=folium.Icon(color="red", prefix="fa", icon="smoking")
+            ).add_to(m)
+
 
     map_html = m._repr_html_()
 
