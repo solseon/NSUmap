@@ -1,4 +1,3 @@
-#다익스트라(출발지, 도착지 직접 연결 제외)
 import os
 import folium
 import csv
@@ -91,12 +90,10 @@ def route():
     end = None
     map_html = None
     error_message = None
-    buildings = load_buildings()
     path_result = None  # 경로 결과 저장
+    buildings = load_buildings()
 
-    test_path = None
-
-    # connections.csv에서 연결 정보 읽기
+    # CSV에서 연결 정보 읽기
     connections = {}
     with open(os.path.join(app.root_path, 'static', 'connections.csv'), 'r', encoding='utf-8') as file:
         reader = csv.reader(file)
@@ -110,6 +107,15 @@ def route():
                 connections[end_building] = {}
             connections[end_building][start_building] = distance
 
+    # 기본 지도 로딩 (처음 페이지를 열 때 지도와 검색 폼을 표시)
+    default_coords = list(buildings.values())[0]  # 첫 번째 건물의 좌표를 기본값으로 설정
+    m = folium.Map(location=default_coords, zoom_start=18)
+    map_html = m._repr_html_()  # 지도 HTML을 전달
+
+    # 카페와 흡연장 위치 로딩
+    cafes = load_places('cafe.csv')  # 카페 위치
+    smoking_areas = load_places('smoking_area.csv')  # 흡연장 위치
+
     if request.method == "POST":
         start = request.form.get('start')
         end = request.form.get('end')
@@ -121,42 +127,73 @@ def route():
         end_coords = buildings.get(end)
 
         if start_coords and end_coords:
-            # 경로 자동 생성
             path = find_path_visiting_all(connections, start, end)
-
             if path:
-                # 경로 출력 (콘솔)
-                print(f"생성된 경로: {' -> '.join(path)}")
-                path_result = " -> ".join(path)  # 경로를 HTML로 표시 가능
+                path_result = " -> ".join(path)
                 coordinates = [buildings[node] for node in path]
-                
-                # folium 지도 생성
-                m = folium.Map(location=start_coords, zoom_start=18)
+
+                # 경로 추가 (폴리라인 및 마커 추가)
+                m = folium.Map(location=start_coords, zoom_start=5)
                 folium.PolyLine(coordinates, color="blue", weight=2.5, opacity=1).add_to(m)
 
-                # 각 노드에 마커 추가
                 for node in path:
                     coords = buildings.get(node)
                     folium.Marker(coords, popup=node).add_to(m)
 
-                map_html = m._repr_html_()
+                map_html = m._repr_html_()  # 업데이트된 지도 HTML
+
             else:
                 error_message = "모든 경로를 방문하는 경로를 찾을 수 없습니다."
         else:
             error_message = f"출발지 또는 도착지 정보가 유효하지 않습니다: {start}, {end}"
-        test_path = 'route_map.html'
-    else:
-        test_path = 'index.html'
-        
+
+    # 카페와 흡연장 마커 추가
+    if request.args.get("show_cafes"):
+        for cafe in cafes:
+            folium.Marker(cafe['coords'], popup=cafe['name'], icon=folium.Icon(color='green')).add_to(m)
+
+    if request.args.get("show_smoking_areas"):
+        for smoking_area in smoking_areas:
+            folium.Marker(smoking_area['coords'], popup=smoking_area['name'], icon=folium.Icon(color='red')).add_to(m)
+
+    map_html = m._repr_html_()  # 마커 추가 후 다시 지도 HTML 업데이트
 
     return render_template(
-        test_path,
-        start=start,
-        end=end,
-        map_html=map_html,
+        'route_map.html', 
+        start=start, 
+        end=end, 
+        map_html=map_html, 
         error_message=error_message, 
-        path_result=path_result  # 경로 결과 전달
+        path_result=path_result, 
+        cafes=cafes, 
+        smoking_areas=smoking_areas  # 카페와 흡연장 데이터를 템플릿에 전달
     )
+
+def load_places(file_name):
+    places = []
+    file_path = os.path.join(app.root_path, 'static', file_name)
+    
+    with open(file_path, 'r', encoding='utf-8') as file:
+        reader = csv.reader(file)
+        next(reader)  # 첫 번째 행(헤더)을 건너뜁니다.
+        
+        for row in reader:
+            # CSV에서 읽은 행(row)의 첫 번째 열을 건물 이름, 두 번째 열을 위도(lat), 세 번째 열을 경도(lon)으로 처리
+            name, lat, lon = row[0], row[1], row[2]
+            
+            # lat와 lon이 숫자값이므로 float로 변환
+            try:
+                lat = float(lat)
+                lon = float(lon)
+            except ValueError:
+                print(f"잘못된 데이터: {name}의 위도({lat}) 또는 경도({lon}) 값이 숫자가 아닙니다.")
+                continue  # 잘못된 데이터가 있으면 건너뜁니다.
+            
+            places.append({'name': name, 'coords': [lat, lon]})
+    
+    return places
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
